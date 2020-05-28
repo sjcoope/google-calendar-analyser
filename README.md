@@ -1,19 +1,24 @@
 # Google Calendar Analyser
 
-#Getting Started
+## Getting Started
+
 clasp login - login to google appscripts.
 
-##Deploy
+## Deploy
+
 'npm run deploy'
 
-##AppScript Dashboard
+## AppScript Dashboard
+
 To view your projects go to https://script.google.com/home.
 
-##List Deployments
+## List Deployments
+
 clasp deployments
 
 # Troubleshooting
 
+**Permission denied when running batch file**
 If you get a "permission denied" error when trying to run the batch file that builds the help file then run this command in the terminal `chmod u+x script.sh`
 
 # TODO
