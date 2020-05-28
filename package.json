@@ -1,0 +1,26 @@
+{
+  "name": "google-calendar-analyser",
+  "version": "1.0.0",
+  "description": "An add-on for GoogleSheets that reads from a google calendar",
+  "main": "index.js",
+  "dependencies": {
+    "@types/google-apps-script": "^1.0.14",
+    "marked": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-help": "./scripts/build_help.sh",
+    "deploy": "clasp push"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sjcoope/google-calendar-analyser.git"
+  },
+  "author": "Simon Coope",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sjcoope/google-calendar-analyser/issues"
+  },
+  "homepage": "https://github.com/sjcoope/google-calendar-analyser#readme"
+}
