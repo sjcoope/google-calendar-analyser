@@ -3,7 +3,12 @@ import { Setting } from './setting';
 import { KeyValuePair } from '../common';
 import { SettingsKeys } from './settings-keys';
 
-export class Settings {
+export interface ISettings {
+  toArray(): Array<Setting>;
+  get(key: SettingsKeys): Setting;
+}
+
+export class Settings implements ISettings {
   private config: Config;
   private settings: Array<Setting>;
 
@@ -29,7 +34,7 @@ export class Settings {
     return array;
   }
 
-  public toArray(): any {
+  public toArray(): Array<Setting> {
     return this.settings;
   }
 

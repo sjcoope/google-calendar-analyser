@@ -2,6 +2,7 @@ import { Settings } from './shared/settings/settings';
 import { SheetsProxy } from './sheets/sheets-proxy';
 import { SheetManager } from './sheets/sheet-manager';
 import { Config } from './shared/config';
+import { initContext, getContext } from './shared/application-context';
 
 function onOpen(e) {
   let ui = SpreadsheetApp.getUi();
@@ -10,6 +11,7 @@ function onOpen(e) {
   menu.addItem('Help', 'showHelpDialog');
   menu.addToUi();
 
+  initContext(SpreadsheetApp);
   Logger.log('Started aws-pricing');
 }
 
@@ -25,13 +27,10 @@ function showHelpDialog() {
 }
 
 function createSettingsSheet() {
-  /* Sample code for structuring other objectives
-  ------------------------------------------------*/
-  var config = new Config();
-  var settings = new Settings(config);
-  var sheetsProxy = new SheetsProxy();
-
-  let sheetManager = new SheetManager(sheetsProxy);
-  sheetManager.createSheet(config.sheetNameSettings);
-  sheetManager.populateSheet(config.sheetNameSettings, settings.toArray());
+  let sheetManager = new SheetManager(getContext().sheetsProxy);
+  sheetManager.createSheet(getContext().config.sheetNameSettings);
+  sheetManager.populateSheet(
+    getContext().config.sheetNameSettings,
+    getContext().settings.toArray()
+  );
 }
