@@ -1,3 +1,5 @@
+import { initAppContext, getContext } from './shared/application-context';
+
 function onOpen(e) {
   let ui = SpreadsheetApp.getUi();
   let menu = ui.createAddonMenu();
@@ -5,7 +7,8 @@ function onOpen(e) {
   menu.addItem('Help', 'showHelpDialog');
   menu.addToUi();
 
-  Logger.log('Started aws-pricing');
+  initAppContext(SpreadsheetApp);
+  Logger.log('Started google-calendar-analyser');
 }
 
 function onInstall(e) {
@@ -14,7 +17,7 @@ function onInstall(e) {
 
 function showHelpDialog() {
   let ui = SpreadsheetApp.getUi();
-  let html = HtmlService.createHtmlOutputFromFile('files/help_dialog');
+  let html = HtmlService.createHtmlOutputFromFile('files/help-dialog');
   html.setTitle('Google Calendar Analyser - Help');
   ui.showSidebar(html);
 }
