@@ -44,6 +44,31 @@ describe('Settings', () => {
           expect(result.value).to.equal('3');
         });
       });
+
+      describe('toArray', () => {
+        it('should return 3 default settings', () => {
+          var result = settings.toArray();
+          expect(result.length).to.equal(3);
+        });
+
+        it('should return CalendarID setting value', () => {
+          var result = settings.toArray();
+          var match = result.find((item) => item.key == SettingsKeys.CalendarID);
+          expect(match.value).to.equal('1');
+        });
+
+        it('should return CategoryIgnore setting value', () => {
+          var result = settings.toArray();
+          var match = result.find((item) => item.key == SettingsKeys.CategoryIgnore);
+          expect(match.value).to.equal('2');
+        });
+
+        it('should return FlowTimeDelayInMins setting value', () => {
+          var result = settings.toArray();
+          var match = result.find((item) => item.key == SettingsKeys.FlowTimeDelayInMins);
+          expect(match.value).to.equal('3');
+        });
+      });
     });
   });
 });

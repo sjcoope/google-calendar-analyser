@@ -30,7 +30,7 @@ export class Settings {
   }
 
   public toArray(): any {
-    throw new Error('Method not implemented.');
+    return this.settings;
   }
 
   public get(key: SettingsKeys): Setting {
