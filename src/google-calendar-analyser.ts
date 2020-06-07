@@ -1,6 +1,5 @@
 import { Settings } from './shared/settings/settings';
 import { SheetsProxy } from './sheets/sheets-proxy';
-import { SheetManager } from './sheets/sheet-manager';
 import { Config } from './shared/config';
 import { initContext, getContext } from './shared/application-context';
 
@@ -27,10 +26,7 @@ function showHelpDialog() {
 }
 
 function createSettingsSheet() {
-  let sheetManager = new SheetManager(getContext().sheetsProxy);
-  sheetManager.createSheet(getContext().config.sheetNameSettings);
-  sheetManager.populateSheet(
-    getContext().config.sheetNameSettings,
-    getContext().settings.toArray()
-  );
+  let sheetsProxy = getContext().sheetsProxy;
+  sheetsProxy.createSheet(getContext().config.sheetNameSettings);
+  sheetsProxy.populateSheet(getContext().config.sheetNameSettings, getContext().settings.toArray());
 }

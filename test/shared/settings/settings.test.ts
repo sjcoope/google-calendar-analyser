@@ -53,19 +53,21 @@ describe('Settings', () => {
 
         it('should return CalendarID setting value', () => {
           var result = settings.toArray();
-          var match = result.find((item) => item.key == SettingsKeys.CalendarID);
+          var match = result.find((item) => item.key == SettingsKeys.CalendarID.toString());
           expect(match.value).to.equal('1');
         });
 
         it('should return CategoryIgnore setting value', () => {
           var result = settings.toArray();
-          var match = result.find((item) => item.key == SettingsKeys.CategoryIgnore);
+          var match = result.find((item) => item.key == SettingsKeys.CategoryIgnore.toString());
           expect(match.value).to.equal('2');
         });
 
         it('should return FlowTimeDelayInMins setting value', () => {
           var result = settings.toArray();
-          var match = result.find((item) => item.key == SettingsKeys.FlowTimeDelayInMins);
+          var match = result.find(
+            (item) => item.key == SettingsKeys.FlowTimeDelayInMins.toString()
+          );
           expect(match.value).to.equal('3');
         });
       });

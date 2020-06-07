@@ -4,7 +4,7 @@ import { KeyValuePair } from '../common';
 import { SettingsKeys } from './settings-keys';
 
 export interface ISettings {
-  toArray(): Array<Setting>;
+  toArray(): Array<KeyValuePair>;
   get(key: SettingsKeys): Setting;
 }
 
@@ -34,8 +34,13 @@ export class Settings implements ISettings {
     return array;
   }
 
-  public toArray(): Array<Setting> {
-    return this.settings;
+  public toArray(): Array<KeyValuePair> {
+    var array = new Array<KeyValuePair>();
+    for (var i = 0; i < this.settings.length; i++) {
+      let setting = this.settings[i];
+      array.push(new KeyValuePair(setting.key.toString(), setting.value));
+    }
+    return array;
   }
 
   public get(key: SettingsKeys): Setting {
