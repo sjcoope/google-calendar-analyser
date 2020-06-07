@@ -1,3 +1,8 @@
+import { Settings } from './shared/settings/settings';
+import { SheetsProxy } from './sheets/sheets-proxy';
+import { SheetManager } from './sheets/sheet-manager';
+import { Config } from './shared/config';
+
 function onOpen(e) {
   let ui = SpreadsheetApp.getUi();
   let menu = ui.createAddonMenu();
@@ -20,5 +25,13 @@ function showHelpDialog() {
 }
 
 function createSettingsSheet() {
-  
+  /* Sample code for structuring other objectives
+  ------------------------------------------------*/
+  var config = new Config();
+  var settings = new Settings(config);
+  var sheetsProxy = new SheetsProxy();
+
+  let sheetManager = new SheetManager(sheetsProxy);
+  sheetManager.createSheet(config.sheetNameSettings);
+  sheetManager.populateSheet(config.sheetNameSettings, settings.toArray());
 }
