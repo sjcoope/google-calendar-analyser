@@ -1,5 +1,7 @@
 import { Config } from '../config';
 import { Setting } from './setting';
+import { KeyValuePair } from '../common';
+import { SettingsKeys } from './settings-keys';
 
 export class Settings {
   private config: Config;
@@ -15,10 +17,23 @@ export class Settings {
   }
 
   private initialise() {
+    this.settings = this.toSettings(this.config.getDefaultSettings());
+  }
 
+  private toSettings(items: Array<KeyValuePair>): Array<Setting> {
+    var array = new Array<Setting>();
+    for (var i = 0; i < items.length; i++) {
+      let item = items[i];
+      array.push(new Setting(SettingsKeys[item.key], item.value));
+    }
+    return array;
   }
 
   public toArray(): any {
     throw new Error('Method not implemented.');
+  }
+
+  public get(key: SettingsKeys): Setting {
+    return this.settings.find((item) => item.key == key);
   }
 }

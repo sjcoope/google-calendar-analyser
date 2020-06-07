@@ -1,6 +1,11 @@
 import { KeyValuePair } from './common';
 
-export class Config {
+export interface IConfig {
+  sheetNameSettings: string;
+  getDefaultSettings(): Array<KeyValuePair>;
+}
+
+export class Config implements IConfig {
   public sheetNameSettings: string = 'Settings';
 
   public getDefaultSettings(): Array<KeyValuePair> {

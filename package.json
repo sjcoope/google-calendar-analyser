@@ -16,7 +16,9 @@
     "ts-node": "^8.10.2",
     "typescript": "^3.9.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "ts-mockito": "^2.5.0"
+  },
   "scripts": {
     "test": "cross-env TS_NODE_FILES=true mocha --exit --require ts-node/register --colors test/**/*.test.ts",
     "coverage": "nyc npm run test",
