@@ -19,4 +19,6 @@ function showHelpDialog() {
   ui.showSidebar(html);
 }
 
-function createSettingsSheet() {}
+function createSettingsSheet() {
+  
+}
