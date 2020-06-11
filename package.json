@@ -20,7 +20,7 @@
     "ts-mockito": "^2.5.0"
   },
   "scripts": {
-    "test": "cross-env TS_NODE_FILES=true mocha --exit --require ts-node/register --colors test/**/*.test.ts",
+    "test": "cross-env TS_NODE_FILES=true mocha --exit --require ts-node/register --colors 'test/**/*.test.ts'",
     "coverage": "nyc npm run test",
     "deploy": "clasp push"
   },
