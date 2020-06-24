@@ -1,8 +1,8 @@
 export enum SettingsKeys {
   CalendarID,
   FlowTimeDelayInMins,
-  WorkingTimeFromDefault,
-  WorkingTimeToDefault,
+  WorkingTimeFrom,
+  WorkingTimeTo,
   LunchTimeDurationInMins,
   DataSheetName,
   DataRangeName,
