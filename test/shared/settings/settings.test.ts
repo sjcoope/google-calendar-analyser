@@ -57,10 +57,22 @@ describe('Settings', () => {
           expect(match.value).to.equal('1');
         });
 
+        it('should return CalendarID setting key of "CalendarID"', () => {
+          var result = settings.toArray();
+          var match = result.find((item) => item.key == SettingsKeys.CalendarID.toString());
+          expect(SettingsKeys[match.key]).to.equal('CalendarID');
+        });
+
         it('should return CategoryIgnore setting value', () => {
           var result = settings.toArray();
           var match = result.find((item) => item.key == SettingsKeys.CategoryIgnore.toString());
           expect(match.value).to.equal('2');
+        });
+
+        it('should return CategoryIgnore setting key of "CategoryIgnore"', () => {
+          var result = settings.toArray();
+          var match = result.find((item) => item.key == SettingsKeys.CategoryIgnore.toString());
+          expect(SettingsKeys[match.key]).to.equal('CategoryIgnore');
         });
 
         it('should return FlowTimeDelayInMins setting value', () => {
@@ -69,6 +81,14 @@ describe('Settings', () => {
             (item) => item.key == SettingsKeys.FlowTimeDelayInMins.toString()
           );
           expect(match.value).to.equal('3');
+        });
+
+        it('should return FlowTimeDelayInMins setting key of "FlowTimeDelayInMins"', () => {
+          var result = settings.toArray();
+          var match = result.find(
+            (item) => item.key == SettingsKeys.FlowTimeDelayInMins.toString()
+          );
+          expect(SettingsKeys[match.key]).to.equal('FlowTimeDelayInMins');
         });
       });
     });

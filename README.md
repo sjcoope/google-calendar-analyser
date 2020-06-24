@@ -10,7 +10,7 @@ clasp login - login to google appscripts.
 
 ## AppScript Dashboard
 
-To view your projects go to https://script.google.com/home.
+To view your projects go to https://script.google.com.
 
 ## List Deployments
 

@@ -6,8 +6,6 @@ describe('Common', () => {
     describe('toMultiDimensionalArray', () => {
       it('should throw error if input is invalid', () => {
         expect(Convertor.toMultiDimensionalArray.bind(null)).to.throw(Error);
-        //expect(dateHelper.formatDate.bind(null)).to.throw('formatDate - date parameter is invalid');
-        //expect(Convertor.toMultiDimensionalArray(null)).to.throw(Error);
       });
 
       it('should return array with length 1 when presented with array length 1', () => {
