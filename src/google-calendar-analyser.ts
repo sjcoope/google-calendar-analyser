@@ -1,7 +1,5 @@
-import { Settings } from './shared/settings/settings';
-import { SheetsProxy } from './sheets/sheets-proxy';
-import { Config } from './shared/config';
-import { initContext, getContext } from './shared/application-context';
+import { Convertor } from './shared/common';
+import { initContext, getContext, _appContext } from './shared/application-context';
 
 function onOpen(e) {
   let ui = SpreadsheetApp.getUi();
@@ -9,9 +7,7 @@ function onOpen(e) {
   menu.addItem('Create Settings Sheet', 'createSettingsSheet');
   menu.addItem('Help', 'showHelpDialog');
   menu.addToUi();
-
-  initContext(SpreadsheetApp);
-  Logger.log('Started aws-pricing');
+  Logger.log('Started google-calendar-analyser');
 }
 
 function onInstall(e) {
@@ -26,7 +22,12 @@ function showHelpDialog() {
 }
 
 function createSettingsSheet() {
+  initContext(SpreadsheetApp.getActive());
   let sheetsProxy = getContext().sheetsProxy;
   sheetsProxy.createSheet(getContext().config.sheetNameSettings);
-  sheetsProxy.populateSheet(getContext().config.sheetNameSettings, getContext().settings.toArray());
+
+  sheetsProxy.populateSheet(
+    getContext().config.sheetNameSettings,
+    Convertor.toMultiDimensionalArray(getContext().settings.toArray())
+  );
 }

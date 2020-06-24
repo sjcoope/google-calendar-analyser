@@ -1,32 +1,43 @@
 import { KeyValuePair } from '../shared/common';
+import { Config } from '../shared/config';
 
 export interface ISheetsProxy {
   sheetExists(sheetName: string): boolean;
   getDataFromSheet(sheetName: string): Array<KeyValuePair>;
-  populateSheet(sheetName: string, data: Array<KeyValuePair>);
-  createSheet(sheetName: string);
+  populateSheet(sheetName: string, data: Object[][]);
+  createSheet(sheetName: string): boolean;
 }
 
 export class SheetsProxy implements ISheetsProxy {
-  private spreadsheetApp: GoogleAppsScript.Spreadsheet.SpreadsheetApp;
+  private spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet;
+  private config: Config;
 
-  constructor(spreadsheetApp: GoogleAppsScript.Spreadsheet.SpreadsheetApp) {
-    this.spreadsheetApp = spreadsheetApp;
+  constructor(spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet, config: Config) {
+    this.spreadsheet = spreadsheet;
+    this.config = config;
   }
 
-  populateSheet(sheetName: string, data: Array<KeyValuePair>) {
-    throw new Error('Method not implemented.');
+  populateSheet(sheetName: string, data: Object[][]) {
+    var sheet = this.spreadsheet.getSheetByName(sheetName);
+    if (!sheet) throw new Error("Cannot get sheet with name of '" + sheetName + "'");
+    var range = sheet.getRange(1, 1, data.length, data[0].length);
+    range.setValues(data);
   }
 
-  createSheet(sheetName: string) {
-    throw new Error('Method not implemented.');
-  }
-
-  sheetExists(sheetName: string) {
+  createSheet(sheetName: string): boolean {
+    var result = this.spreadsheet.getSheetByName(sheetName);
+    if (!result) {
+      result = this.spreadsheet.insertSheet(sheetName);
+      return true;
+    }
     return false;
   }
 
-  getDataFromSheet(sheetName: string) {
-    return new Array<KeyValuePair>();
+  sheetExists(sheetName: string): boolean {
+    return !this.spreadsheet.getSheetByName(sheetName);
+  }
+
+  getDataFromSheet(sheetName: string): Array<KeyValuePair> {
+    throw new Error('Method not implemented.');
   }
 }

@@ -3,9 +3,10 @@ import { ISettings, Settings } from './settings/settings';
 import { ISheetsProxy, SheetsProxy } from '../sheets/sheets-proxy';
 
 export class AppContext {
-  constructor(spreadsheetApp: GoogleAppsScript.Spreadsheet.SpreadsheetApp) {
+  constructor(spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet) {
+    if (!spreadsheet) throw new Error("Invalid constructor parameter: 'spreadsheet'");
     this.config = new Config();
-    this.sheetsProxy = new SheetsProxy(spreadsheetApp);
+    this.sheetsProxy = new SheetsProxy(spreadsheet, this.config);
     this.settings = new Settings(this.config);
   }
 
@@ -14,17 +15,18 @@ export class AppContext {
   config: IConfig;
 }
 
-let _appContext: AppContext = null;
+export let _appContext: AppContext = null;
 
-export function initContext(spreadsheetApp: GoogleAppsScript.Spreadsheet.SpreadsheetApp) {
-  if (!_appContext) {
-    _appContext = new AppContext(spreadsheetApp);
+export function initContext(spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet) {
+  if (!spreadsheet) throw new Error("Invalid parameter: 'spreadsheet'");
+  if (!this._appContext) {
+    this._appContext = new AppContext(spreadsheet);
   }
 }
 
 export function getContext() {
-  if (!_appContext) {
+  if (!this._appContext) {
     throw new Error('AppContext must be initialised before it can be used');
   }
-  return _appContext;
+  return this._appContext;
 }
