@@ -53,32 +53,32 @@ describe('Settings', () => {
 
         it('should return CalendarID setting value', () => {
           var result = settings.toArray();
-          var match = result.find((item) => item.key == SettingsKeys.CalendarID.toString());
+          var match = result.find((item) => item.key == SettingsKeys[SettingsKeys.CalendarID]);
           expect(match.value).to.equal('1');
         });
 
         it('should return CalendarID setting key of "CalendarID"', () => {
           var result = settings.toArray();
-          var match = result.find((item) => item.key == SettingsKeys.CalendarID.toString());
-          expect(SettingsKeys[match.key]).to.equal('CalendarID');
+          var match = result.find((item) => item.key == SettingsKeys[SettingsKeys.CalendarID]);
+          expect(match.key).to.equal('CalendarID');
         });
 
         it('should return CategoryIgnore setting value', () => {
           var result = settings.toArray();
-          var match = result.find((item) => item.key == SettingsKeys.CategoryIgnore.toString());
+          var match = result.find((item) => item.key == SettingsKeys[SettingsKeys.CategoryIgnore]);
           expect(match.value).to.equal('2');
         });
 
         it('should return CategoryIgnore setting key of "CategoryIgnore"', () => {
           var result = settings.toArray();
-          var match = result.find((item) => item.key == SettingsKeys.CategoryIgnore.toString());
-          expect(SettingsKeys[match.key]).to.equal('CategoryIgnore');
+          var match = result.find((item) => item.key == SettingsKeys[SettingsKeys.CategoryIgnore]);
+          expect(match.key).to.equal('CategoryIgnore');
         });
 
         it('should return FlowTimeDelayInMins setting value', () => {
           var result = settings.toArray();
           var match = result.find(
-            (item) => item.key == SettingsKeys.FlowTimeDelayInMins.toString()
+            (item) => item.key == SettingsKeys[SettingsKeys.FlowTimeDelayInMins]
           );
           expect(match.value).to.equal('3');
         });
@@ -86,9 +86,9 @@ describe('Settings', () => {
         it('should return FlowTimeDelayInMins setting key of "FlowTimeDelayInMins"', () => {
           var result = settings.toArray();
           var match = result.find(
-            (item) => item.key == SettingsKeys.FlowTimeDelayInMins.toString()
+            (item) => item.key == SettingsKeys[SettingsKeys.FlowTimeDelayInMins]
           );
-          expect(SettingsKeys[match.key]).to.equal('FlowTimeDelayInMins');
+          expect(match.key).to.equal('FlowTimeDelayInMins');
         });
       });
     });

@@ -38,7 +38,7 @@ export class Settings implements ISettings {
     var array = new Array<KeyValuePair>();
     for (var i = 0; i < this.settings.length; i++) {
       let setting = this.settings[i];
-      array.push(new KeyValuePair(setting.key.toString(), setting.value));
+      array.push(new KeyValuePair(SettingsKeys[setting.key], setting.value));
     }
     return array;
   }
