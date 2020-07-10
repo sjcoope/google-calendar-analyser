@@ -31,17 +31,17 @@ describe('Settings', () => {
       describe('get', () => {
         it('should return default CalendarID configuration setting', () => {
           let result = settings.get(SettingsKeys.CalendarID);
-          expect(result.value).to.equal('1');
+          expect(result).to.equal('1');
         });
 
         it('should return default CategoryIgnore configuration setting', () => {
           var result = settings.get(SettingsKeys.CategoryIgnore);
-          expect(result.value).to.equal('2');
+          expect(result).to.equal('2');
         });
 
         it('should return default FlowTimeDelayInMins configuration setting', () => {
           var result = settings.get(SettingsKeys.FlowTimeDelayInMins);
-          expect(result.value).to.equal('3');
+          expect(result).to.equal('3');
         });
       });
 
