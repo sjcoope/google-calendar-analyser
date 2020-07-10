@@ -1,5 +1,4 @@
 import { Config } from '../config';
-import { Setting } from './setting';
 import { KeyValuePair } from '../common';
 import { SettingsKeys } from './settings-keys';
 
