@@ -1,5 +1,8 @@
 import { Convertor } from './shared/common';
-import { initContext, getContext, _appContext } from './shared/application-context';
+import { initContext, getContext, _appContext, AppContext } from './shared/application-context';
+import { Context } from 'mocha';
+
+var context: Context;
 
 function onOpen(e) {
   let ui = SpreadsheetApp.getUi();
@@ -14,6 +17,12 @@ function onInstall(e) {
   onOpen(e);
 }
 
+function initialise() {
+  // Has to be called from a custom function due to lack of permissions
+  // to run during google set-up function.
+  this.context = new AppContext(SpreadsheetApp.getActive());
+}
+
 function showHelpDialog() {
   let ui = SpreadsheetApp.getUi();
   let html = HtmlService.createHtmlOutputFromFile('files/help_dialog');
@@ -22,12 +31,12 @@ function showHelpDialog() {
 }
 
 function createSettingsSheet() {
-  initContext(SpreadsheetApp.getActive());
-  let sheetsProxy = getContext().sheetsProxy;
-  sheetsProxy.createSheet(getContext().config.sheetNameSettings);
+  initialise();
+  let sheetsProxy = this.context.sheetsProxy;
+  sheetsProxy.createSheet(this.context.config.sheetNameSettings);
 
   sheetsProxy.populateSheet(
-    getContext().config.sheetNameSettings,
-    Convertor.toMultiDimensionalArray(getContext().settings.toArray())
+    this.context.config.sheetNameSettings,
+    Convertor.toMultiDimensionalArray(this.context.settings.toArray())
   );
 }
