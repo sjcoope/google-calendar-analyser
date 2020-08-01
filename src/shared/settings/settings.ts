@@ -4,7 +4,7 @@ import { SettingsKeys } from './settings-keys';
 
 export interface ISettings {
   toArray(): Array<KeyValuePair>;
-  get(key: SettingsKeys): String;
+  get(key: SettingsKeys): string;
 }
 
 export class Settings implements ISettings {
@@ -33,7 +33,7 @@ export class Settings implements ISettings {
     return array;
   }
 
-  public get(key: SettingsKeys): String {
+  public get(key: SettingsKeys): string {
     var match = this.settings.find((item) => item.key == SettingsKeys[key]);
     return !match ? null : match.value;
   }

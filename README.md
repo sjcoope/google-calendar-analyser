@@ -29,3 +29,4 @@ If you get a "permission denied" error when trying to run the batch file that bu
 - Remove complexity tooling
 - Add tslinting
 - Set-up scanning in sonarcloud
+- Better and more flexible mocking of GoogleAppScript objects - mock via another library and populate data via faker??

@@ -3,8 +3,8 @@ import { Config } from '../shared/config';
 
 export interface ISheetsProxy {
   sheetExists(sheetName: string): boolean;
-  getDataFromSheet(sheetName: string): Array<KeyValuePair>;
-  populateSheet(sheetName: string, data: Object[][]);
+  populateSheet(sheetName: string, data: Object[][]): boolean;
+  populateSheet(sheetName: string, data: Object[][], rangeName: string): boolean;
   createSheet(sheetName: string): boolean;
 }
 
@@ -17,11 +17,19 @@ export class SheetsProxy implements ISheetsProxy {
     this.config = config;
   }
 
-  populateSheet(sheetName: string, data: Object[][]) {
+  populateSheet(sheetName: string, data: Object[][], rangeName?: string): boolean {
     var sheet = this.spreadsheet.getSheetByName(sheetName);
     if (!sheet) throw new Error("Cannot get sheet with name of '" + sheetName + "'");
+
+    // TODO: Handle assigning range name (or rewriting if it exists)
     var range = sheet.getRange(1, 1, data.length, data[0].length);
     range.setValues(data);
+
+    if (rangeName) {
+      this.spreadsheet.setNamedRange(rangeName, range);
+    }
+
+    return true;
   }
 
   createSheet(sheetName: string): boolean {
@@ -35,9 +43,5 @@ export class SheetsProxy implements ISheetsProxy {
 
   sheetExists(sheetName: string): boolean {
     return !this.spreadsheet.getSheetByName(sheetName);
-  }
-
-  getDataFromSheet(sheetName: string): Array<KeyValuePair> {
-    throw new Error('Method not implemented.');
   }
 }
