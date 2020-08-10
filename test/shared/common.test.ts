@@ -38,55 +38,49 @@ describe('Common', () => {
         var input = new Date(2019, 11, 1, 10, 15, 15);
         var result = DateHelper.formatDate(input);
 
-        expect(result).to.equal('01/12/2019 10:15');
+        expect(result).to.equal('2019-12-01T10:15');
       });
 
       it('handles date with single digit month', () => {
         var input = new Date(2019, 1, 12, 10, 15, 15);
         var result = DateHelper.formatDate(input);
 
-        expect(result).to.equal('12/02/2019 10:15');
+        expect(result).to.equal('2019-02-12T10:15');
       });
 
       it('handles date with single digit hour', () => {
         var input = new Date(2019, 1, 12, 1, 15, 15);
         var result = DateHelper.formatDate(input);
 
-        expect(result).to.equal('12/02/2019 01:15');
+        expect(result).to.equal('2019-02-12T01:15');
       });
 
       it('handles date with single digit minute', () => {
         var input = new Date(2019, 1, 12, 11, 2, 15);
         var result = DateHelper.formatDate(input);
 
-        expect(result).to.equal('12/02/2019 11:02');
+        expect(result).to.equal('2019-02-12T11:02');
       });
 
       it('handles midnight', () => {
         var input = new Date(2019, 1, 12);
         var result = DateHelper.formatDate(input);
 
-        expect(result).to.equal('12/02/2019 00:00');
+        expect(result).to.equal('2019-02-12T00:00');
       });
     });
 
     describe('getDateRanges', () => {
       it('throws an error if week number is null', () => {
-        expect(DateHelper.getDateRanges.bind(null)).to.throw(
-          'getDateRanges - weekNumber parameter is invalid'
-        );
+        expect(DateHelper.getDateRanges.bind(null)).to.throw('getDateRanges - weekNumber parameter is invalid');
       });
 
       it('throws an error if week number is not a number', () => {
-        expect(DateHelper.getDateRanges.bind('test')).to.throw(
-          'getDateRanges - weekNumber parameter is invalid'
-        );
+        expect(DateHelper.getDateRanges.bind('test')).to.throw('getDateRanges - weekNumber parameter is invalid');
       });
 
       it('throws an error if week number is negative', () => {
-        expect(DateHelper.getDateRanges.bind(-1)).to.throw(
-          'getDateRanges - weekNumber parameter is invalid'
-        );
+        expect(DateHelper.getDateRanges.bind(-1)).to.throw('getDateRanges - weekNumber parameter is invalid');
       });
 
       it('returns current week range when weekNumber is 0', () => {

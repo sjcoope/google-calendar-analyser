@@ -23,7 +23,7 @@ function onInstall(e) {
 function initialise() {
   // Has to be called from a custom function due to lack of permissions
   // to run during google set-up function.
-  this.context = new AppContext(SpreadsheetApp.getActive(), CalendarApp);
+  this.context = new AppContext(SpreadsheetApp, CalendarApp);
 }
 
 function showHelpDialog() {
@@ -38,10 +38,7 @@ function createSettingsSheet() {
   let sheetsProxy = this.context.sheetsProxy;
   sheetsProxy.createSheet(this.context.config.sheetNameSettings);
 
-  sheetsProxy.populateSheet(
-    this.context.config.sheetNameSettings,
-    Convertor.toMultiDimensionalArray(this.context.settings.toArray())
-  );
+  sheetsProxy.populateSheet(this.context.config.sheetNameSettings, Convertor.toMultiDimensionalArray(this.context.settings.toArray()));
 }
 
 function getCalendarData() {
@@ -56,9 +53,8 @@ function getCalendarData() {
     context.sheetsProxy.createSheet(datasheetName);
   }
 
-  context.sheetsProxy.populateSheet(
-    datasheetName,
-    Convertor.toMultiDimensionalArray(events, true),
-    context.settings.get(SettingsKeys.DataRangeName)
-  );
+  context.sheetsProxy.populateSheet(datasheetName, Convertor.toMultiDimensionalArray(events, true), context.settings.get(SettingsKeys.DataRangeName));
+
+  // TODO - expose this via SheetsProxy (means changing to pass SpreadsheetApp to create proxy and changing all tests)
+  SpreadsheetApp.flush();
 }
