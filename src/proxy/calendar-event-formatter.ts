@@ -9,7 +9,7 @@ export class CalendarEventFormatter {
     // TODO: Fix to read from Google CalendarEvent
     //let myStatus = input.getMyStatus();
     //calendarEvent.myStatus = myStatus.toString();
-    calendarEvent.myStatus = 'YES';
+    calendarEvent.myStatus = input.getMyStatus().toString();
 
     calendarEvent.guests = new Array<string>();
     var eventGuests = input.getGuestList();
