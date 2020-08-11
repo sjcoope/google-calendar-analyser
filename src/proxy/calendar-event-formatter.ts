@@ -1,9 +1,12 @@
 import { CalendarEvent } from './calendar-event';
+import { DateHelper } from '../shared/common';
 
 export class CalendarEventFormatter {
   // TODO: consider moving to CalendarEvent so class handles all it's own formatting.
   static fromGoogleCalendarEvent(input: GoogleAppsScript.Calendar.CalendarEvent): CalendarEvent {
     const calendarEvent = new CalendarEvent();
+    const startTime = new Date(input.getStartTime().toString());
+    const endTime = new Date(input.getEndTime().toString());
 
     // Unable to mock the enum to test this property so testing value
     // to ensure tests don't fail (see Issue #1 in ReadMe).
@@ -17,10 +20,10 @@ export class CalendarEventFormatter {
     }
 
     calendarEvent.title = input.getTitle();
-    calendarEvent.startTime = new Date(input.getStartTime().toString());
-    calendarEvent.endTime = new Date(input.getEndTime().toString());
+    calendarEvent.startTime = DateHelper.formatDate(startTime);
+    calendarEvent.endTime = DateHelper.formatDate(endTime);
     calendarEvent.creators = input.getCreators();
-    calendarEvent.durationInMins = Math.round((calendarEvent.endTime.getTime() - calendarEvent.startTime.getTime()) / 1000 / 60);
+    calendarEvent.durationInMins = Math.round((endTime.getTime() - startTime.getTime()) / 1000 / 60);
     calendarEvent.isRecurring = input.isRecurringEvent();
     calendarEvent.location = input.getLocation();
     calendarEvent.color = input.getColor().toString();

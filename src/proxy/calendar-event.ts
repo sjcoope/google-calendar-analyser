@@ -1,7 +1,7 @@
 export class CalendarEvent {
   public title: string;
-  public startTime: Date;
-  public endTime: Date;
+  public startTime: string;
+  public endTime: string;
   public durationInMins: number;
   public myStatus: string;
   public guests: string[];

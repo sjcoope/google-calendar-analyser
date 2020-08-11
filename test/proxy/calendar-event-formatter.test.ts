@@ -57,6 +57,14 @@ describe('CalendarEventFormatter', () => {
       expect(event.creators).to.eql(creators);
     });
 
+    it('should format startTime', () => {
+      expect(event.startTime).to.equal('2020-05-19T09:30');
+    });
+
+    it('should format endTime', () => {
+      expect(event.endTime).to.equal('2020-05-19T10:30');
+    });
+
     it('should format durationInMins', () => {
       expect(event.durationInMins).to.equal(durationInMins);
     });
