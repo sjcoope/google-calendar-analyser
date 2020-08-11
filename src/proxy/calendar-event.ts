@@ -3,7 +3,7 @@ export class CalendarEvent {
   public startTime: Date;
   public endTime: Date;
   public durationInMins: number;
-  public myStatus: String;
+  public myStatus: string;
   public guests: string[];
   public creators: string[];
   public isRecurring: boolean;

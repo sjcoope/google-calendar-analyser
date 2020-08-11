@@ -1,6 +1,3 @@
-import { start } from 'repl';
-import { CalendarEvent } from '../proxy/calendar-event';
-
 export class KeyValuePair {
   constructor(key: string, value: string) {
     this.key = key;
@@ -12,28 +9,33 @@ export class KeyValuePair {
 }
 
 export class Convertor {
-  static toMultiDimensionalArray(items: Array<any>, addTitleRow?: boolean): Array<Array<String>> {
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  static toMultiDimensionalArray(items: Array<any>, removeTitleRow?: boolean): Array<Array<string>> {
     if (!items) {
       throw new Error('toMultiDimensionalArray: Invalid parameter');
     }
 
-    var parentArray = new Array();
-    var childArray = new Array();
+    const parentArray = [];
+    let childArray = [];
     if (items.length == 0) return parentArray;
 
-    for (var i = 0; i < items.length; i++) {
-      var item = items[i];
-      childArray = new Array();
-      for (var property in item) {
+    const startIndex: number = removeTitleRow ? 1 : 0;
+    for (let i = startIndex; i < items.length; i++) {
+      const item = items[i];
+      childArray = [];
+      for (const property in item) {
+        /* eslint-disable no-prototype-builtins */
         if (item.hasOwnProperty(property)) {
           childArray.push(item[property]);
         }
+        /* eslint-enable no-prototype-builtins */
       }
       parentArray.push(childArray);
     }
 
     return parentArray;
   }
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 }
 
 export class DateHelper {
@@ -59,9 +61,9 @@ export class DateHelper {
       throw new Error('getDateRanges - weekNumber parameter is invalid');
     }
 
-    var currentDate = date ?? new Date();
-    var startDate = DateHelper.getLastMonday(currentDate);
-    var endDate = new Date(startDate);
+    const currentDate = date ?? new Date();
+    const startDate = DateHelper.getLastMonday(currentDate);
+    const endDate = new Date(startDate);
     endDate.setDate(endDate.getDate() - endDate.getDay() + 5);
     endDate.setHours(23, 59, 59);
 
@@ -74,11 +76,11 @@ export class DateHelper {
   }
 
   static getLastMonday(date: Date): Date {
-    var d = date != null ? date : new Date();
+    const d = date != null ? date : new Date();
     d.setHours(0, 0, 0, 0);
 
-    var day = d.getDay();
-    var diff = d.getDate() - day + (day == 0 ? -6 : 1);
+    const day = d.getDay();
+    const diff = d.getDate() - day + (day == 0 ? -6 : 1);
     return new Date(d.setDate(diff));
   }
 }

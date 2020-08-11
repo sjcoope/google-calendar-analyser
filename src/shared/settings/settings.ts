@@ -25,16 +25,16 @@ export class Settings implements ISettings {
   }
 
   public toArray(): Array<KeyValuePair> {
-    var array = new Array<KeyValuePair>();
-    for (var i = 0; i < this.settings.length; i++) {
-      let setting = this.settings[i];
+    const array = new Array<KeyValuePair>();
+    for (let i = 0; i < this.settings.length; i++) {
+      const setting = this.settings[i];
       array.push(new KeyValuePair(setting.key, setting.value));
     }
     return array;
   }
 
   public get(key: SettingsKeys): string {
-    var match = this.settings.find((item) => item.key == SettingsKeys[key]);
+    const match = this.settings.find((item) => item.key == SettingsKeys[key]);
     return !match ? null : match.value;
   }
 }

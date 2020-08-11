@@ -1,7 +1,9 @@
 import { CalendarEvent } from './calendar-event';
 import { CalendarEventFormatter } from './calendar-event-formatter';
 
-export interface ICalendarProxy {}
+export interface ICalendarProxy {
+  getEvents(startDate: Date, endDate: Date): Array<CalendarEvent>;
+}
 
 export class CalendarProxy implements ICalendarProxy {
   private calendar: GoogleAppsScript.Calendar.Calendar;
@@ -12,12 +14,12 @@ export class CalendarProxy implements ICalendarProxy {
   }
 
   getEvents(startDate: Date, endDate: Date): Array<CalendarEvent> {
-    var results = new Array<CalendarEvent>();
-    var events = this.calendar.getEvents(startDate, endDate);
+    const results = new Array<CalendarEvent>();
+    const events = this.calendar.getEvents(startDate, endDate);
 
-    for (var i = 0; i < events.length; i++) {
-      var event = events[i];
-      var calendarEvent = CalendarEventFormatter.fromGoogleCalendarEvent(event);
+    for (let i = 0; i < events.length; i++) {
+      const event = events[i];
+      const calendarEvent = CalendarEventFormatter.fromGoogleCalendarEvent(event);
       results.push(calendarEvent);
     }
 

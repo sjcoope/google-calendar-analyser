@@ -25,6 +25,24 @@ describe('Common', () => {
         var result = Convertor.toMultiDimensionalArray(input);
         expect(result[0][1]).to.equal(input[0].value);
       });
+
+      it('should return array with length 2 when removeTitleRow parameter is true', () => {
+        var input = new Array<KeyValuePair>(new KeyValuePair('Id', 'Text'), new KeyValuePair('1', 'One'), new KeyValuePair('2', 'Two'));
+        var result = Convertor.toMultiDimensionalArray(input, true);
+        expect(result.length).to.equal(2);
+      });
+
+      it('should return array with length 3 when removeTitleRow parameter is false', () => {
+        var input = new Array<KeyValuePair>(new KeyValuePair('Id', 'Text'), new KeyValuePair('1', 'One'), new KeyValuePair('2', 'Two'));
+        var result = Convertor.toMultiDimensionalArray(input, false);
+        expect(result.length).to.equal(3);
+      });
+
+      it('should return array with length 3 when removeTitleRow parameter is not provided', () => {
+        var input = new Array<KeyValuePair>(new KeyValuePair('Id', 'Text'), new KeyValuePair('1', 'One'), new KeyValuePair('2', 'Two'));
+        var result = Convertor.toMultiDimensionalArray(input);
+        expect(result.length).to.equal(3);
+      });
     });
   });
 

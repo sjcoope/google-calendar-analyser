@@ -6,7 +6,7 @@ export interface IConfig {
 }
 
 export class Config implements IConfig {
-  public sheetNameSettings: string = 'Settings';
+  public sheetNameSettings = 'Settings';
 
   public getDefaultSettings(): Array<KeyValuePair> {
     return new Array<KeyValuePair>(

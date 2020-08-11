@@ -25,7 +25,8 @@
     "test": "cross-env TS_NODE_FILES=true mocha --exit --require ts-node/register --colors 'test/**/*.test.ts'",
     "coverage": "nyc npm run test",
     "deploy": "clasp push",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "lint-fix": "eslint . --ext .ts --fix"
   },
   "repository": {
     "type": "git",
