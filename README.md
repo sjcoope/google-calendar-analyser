@@ -30,3 +30,10 @@ If you get a "permission denied" error when trying to run the batch file that bu
 - Add tslinting
 - Set-up scanning in sonarcloud
 - Better and more flexible mocking of GoogleAppScript objects - mock via another library and populate data via faker??
+
+# Issues
+
+Issue#1 - Cannot test CalendarEvent.getMyStatus() as this refers to GoogleAppsScript.Calendar.GuestStatus which I can't reference as the
+    GoogleAppsScript typing is global and hence not 'importable' into this test. I've tried defining my own types that declare
+    modules that can be imported but can't seem to get it to work. Also tried overriding global in mocha test but had issues
+    matching types. Have spent enough time on it so deferring!

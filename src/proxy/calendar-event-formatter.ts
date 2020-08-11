@@ -6,10 +6,10 @@ export class CalendarEventFormatter {
   static fromGoogleCalendarEvent(input: GoogleAppsScript.Calendar.CalendarEvent): CalendarEvent {
     var calendarEvent = new CalendarEvent();
 
-    // TODO: Fix to read from Google CalendarEvent
-    //let myStatus = input.getMyStatus();
-    //calendarEvent.myStatus = myStatus.toString();
-    calendarEvent.myStatus = input.getMyStatus().toString();
+    // Unable to mock the enum to test this property so testing value
+    // to ensure tests don't fail (see Issue #1 in ReadMe).
+    let myStatus = input.getMyStatus();
+    if (myStatus) calendarEvent.myStatus = myStatus.toString();
 
     calendarEvent.guests = new Array<string>();
     var eventGuests = input.getGuestList();

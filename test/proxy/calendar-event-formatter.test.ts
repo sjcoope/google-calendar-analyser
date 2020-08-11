@@ -3,12 +3,6 @@ import { expect } from 'chai';
 import { CalendarEvent } from '../../src/proxy/calendar-event';
 import { mock, when, instance } from 'ts-mockito';
 
-/*  Issue #1 = Cannot test myStatus as this refers to GoogleAppsScript.Calendar.GuestStatus which I can't reference as the
-    GoogleAppsScript typing is global and hence not 'importable' into this test. I've tried defining my own types that declare
-    modules that can be imported but can't seem to get it to work. Also tried overriding global in mocha test but had issues
-    matching types. Have spent enough time on it so deferring!
-*/
-
 describe('CalendarEventFormatter', () => {
   describe('fromGoogleCalendarEvent', () => {
     var event: CalendarEvent;
@@ -46,8 +40,10 @@ describe('CalendarEventFormatter', () => {
       when(mockedCalendarEvent.isRecurringEvent()).thenReturn(isRecurring);
       when(mockedCalendarEvent.getLocation()).thenReturn(location);
 
-      // ISSUE: See Issue #1 in notes
+      // ISSUE: See Issue #1 in ReadMe
       //when(mockedCalendarEvent.getMyStatus()).thenReturn(GoogleAppsScript.Calendar.GuestStatus.YES);
+
+      when(mockedCalendarEvent.getMyStatus()).thenReturn();
 
       const googleCalendarEvent: GoogleAppsScript.Calendar.CalendarEvent = instance(mockedCalendarEvent);
       event = CalendarEventFormatter.fromGoogleCalendarEvent(googleCalendarEvent);
@@ -81,7 +77,7 @@ describe('CalendarEventFormatter', () => {
       expect(event.location).to.equal(location);
     });
 
-    // ISSUE: See Issue #1 in notes.
+    // ISSUE: See Issue #1 in ReadMe.
     // it('should format myStatus', () => {
     //   expect(event.myStatus).to.equal(myStatus);
     // });
