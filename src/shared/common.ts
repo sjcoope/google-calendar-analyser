@@ -10,7 +10,7 @@ export class KeyValuePair {
 
 export class Convertor {
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  static toMultiDimensionalArray(items: Array<any>, removeTitleRow?: boolean): Array<Array<string>> {
+  static toMultiDimensionalArray(items: Array<any>, addTitleRow?: boolean): Array<Array<string>> {
     if (!items) {
       throw new Error('toMultiDimensionalArray: Invalid parameter');
     }
@@ -19,8 +19,15 @@ export class Convertor {
     let childArray = [];
     if (items.length == 0) return parentArray;
 
-    const startIndex: number = removeTitleRow ? 1 : 0;
-    for (let i = startIndex; i < items.length; i++) {
+    if (addTitleRow) {
+      const firstItem = items[0];
+      for (const property in firstItem) {
+        childArray.push(property);
+      }
+      parentArray.push(childArray);
+    }
+
+    for (let i = 0; i < items.length; i++) {
       const item = items[i];
       childArray = [];
       for (const property in item) {
