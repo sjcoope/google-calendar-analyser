@@ -34,8 +34,8 @@ describe('CalendarEventFormatter', () => {
       when(mockedCalendarEvent.getColor()).thenReturn(color);
       when(mockedCalendarEvent.getCreators()).thenReturn(creators);
       when(mockedCalendarEvent.getGuestList()).thenReturn(guests);
-      when(mockedCalendarEvent.getStartTime()).thenReturn(new Date(startTime));
-      when(mockedCalendarEvent.getEndTime()).thenReturn(new Date(endTime));
+      when(mockedCalendarEvent.getStartTime()).thenReturn(startTime);
+      when(mockedCalendarEvent.getEndTime()).thenReturn(endTime);
       when(mockedCalendarEvent.isAllDayEvent()).thenReturn(isAllDayEvent);
       when(mockedCalendarEvent.isRecurringEvent()).thenReturn(isRecurring);
       when(mockedCalendarEvent.getLocation()).thenReturn(location);
@@ -58,11 +58,11 @@ describe('CalendarEventFormatter', () => {
     });
 
     it('should format startTime', () => {
-      expect(event.startTime).to.equal('2020-05-19T09:30');
+      expect(event.startTime.getTime()).to.equal(startTime.getTime());
     });
 
     it('should format endTime', () => {
-      expect(event.endTime).to.equal('2020-05-19T10:30');
+      expect(event.endTime.getTime()).to.equal(endTime.getTime());
     });
 
     it('should format durationInMins', () => {

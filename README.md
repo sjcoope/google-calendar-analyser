@@ -25,6 +25,10 @@ If you get a "permission denied" error when trying to run the batch file that bu
 
 - Automate build of help dialog.
 - Add getting started to help dialog (capture first steps, settings, etc.)
+- Tracking Flow Time
+- Reading settings from page (not from Config)
+- End to end testing
+- Add hours of conflicts during week.
 
 # Issues
 

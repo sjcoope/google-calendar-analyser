@@ -10,7 +10,7 @@ export class KeyValuePair {
 
 export class Convertor {
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  static toMultiDimensionalArray(items: Array<any>, addTitleRow?: boolean): Array<Array<string>> {
+  static toMultiDimensionalArray(items: Array<any>, addTitleRow?: boolean): Array<Array<any>> {
     if (!items) {
       throw new Error('toMultiDimensionalArray: Invalid parameter');
     }
