@@ -30,6 +30,12 @@ If you get a "permission denied" error when trying to run the batch file that bu
 - End to end testing
 - Add hours of conflicts during week.
 
+# Bugs/Fixes
+
+- Date locality issue.
+- If no colours/categories specified in week then queries fail (as limiting by number 10 but sheets has set the column to be text)
+- Workout how to handle conflicts.  Should they be recorded as time/meetings when the person can't be in the same place at the same time?? Maybe do that because then we can show the total hours of meetings the person is in.  Show hours of conflicts during week and breakdown per day (for single week view).
+
 # Issues
 
 Issue#1 - Cannot test CalendarEvent.getMyStatus() as this refers to GoogleAppsScript.Calendar.GuestStatus which I can't reference as the
