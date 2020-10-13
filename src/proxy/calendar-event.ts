@@ -1,3 +1,5 @@
+import { CalendarEventColour } from "./calendar-event-colour";
+
 export class CalendarEvent {
   public title: string;
   public startTime: Date;
@@ -8,6 +10,6 @@ export class CalendarEvent {
   public creators: string[];
   public isRecurring: boolean;
   public location: string;
-  public color: string;
+  public color: CalendarEventColour;
   public isAllDayMeeting: boolean;
 }

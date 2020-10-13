@@ -2,6 +2,7 @@ import { CalendarEventFormatter } from '../../src/proxy/calendar-event-formatter
 import { expect } from 'chai';
 import { CalendarEvent } from '../../src/proxy/calendar-event';
 import { mock, when, instance } from 'ts-mockito';
+import { CalendarEventColour } from '../../src/proxy/calendar-event-colour';
 
 describe('CalendarEventFormatter', () => {
   describe('fromGoogleCalendarEvent', () => {
@@ -50,7 +51,7 @@ describe('CalendarEventFormatter', () => {
     });
 
     it('should format color', () => {
-      expect(event.color).to.equal(color);
+      expect(event.color).to.equal(CalendarEventColour[CalendarEventColour.Green]);
     });
 
     it('should format creators', () => {
