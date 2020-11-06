@@ -1,12 +1,41 @@
-import { Convertor, DateHelper } from './shared/common';
+import { Convertor, DateHelper, KeyValuePair } from './shared/common';
 import { AppContext } from './shared/application-context';
-import { Context } from 'mocha';
 import { SettingsKeys } from './shared/settings/settings-keys';
+import { Config } from './shared/config';
+import { SheetsProxy } from './proxy/sheets-proxy';
+import { Settings } from './shared/settings/settings';
+import { CalendarProxy } from './proxy/calendar-proxy';
 
+// Note: Has to be done this way as we've not initialised the AppContext yet and so can't
+// call appContext.settings (and we need settings to initialise it).
+function initialiseSettings(config: Config) {
+  const settingsSheet = SpreadsheetApp.getActive().getSheetByName(config.sheetNameSettings);
+  let settingsArray = new Array<KeyValuePair>();
+  if (!settingsSheet) {
+    settingsArray = config.getDefaultSettings();
+  } else {
+    // Read from settings sheet.
+    settingsArray = Convertor.toKeyValuePairArray(settingsSheet.getSheetValues(
+      config.sheetRangeSettings.startRow,
+      config.sheetRangeSettings.startColumn,
+      config.sheetRangeSettings.numRows,
+      config.sheetRangeSettings.numColumns
+    ));
+  }
+  return new Settings(settingsArray);
+}
+
+// Note: Has to be called from a custom function due to lack of permissions to run during google set-up function.
 function initialise() {
-  // Has to be called from a custom function due to lack of permissions
-  // to run during google set-up function.
-  this.context = new AppContext(SpreadsheetApp, CalendarApp);
+  const config = new Config();
+  const settings = initialiseSettings(config);
+
+  this.context = new AppContext(
+    new SheetsProxy(SpreadsheetApp.getActive()),
+    new CalendarProxy(CalendarApp.getCalendarById(settings.get(SettingsKeys.CalendarID))),
+    settings,
+    config
+  );
 }
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -31,8 +60,7 @@ function createSettingsSheet() {
   initialise();
   const sheetsProxy = this.context.sheetsProxy;
   sheetsProxy.createSheet(this.context.config.sheetNameSettings);
-
-  sheetsProxy.populateSheet(this.context.config.sheetNameSettings, Convertor.toMultiDimensionalArray(this.context.settings.toArray()));
+  sheetsProxy.populateSheet(this.context.config.sheetNameSettings, Convertor.toMultiDimensionalArray(this.context.config));
 }
 
 function getCalendarData() {

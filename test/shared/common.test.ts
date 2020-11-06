@@ -44,6 +44,53 @@ describe('Common', () => {
         expect(result.length).to.equal(2);
       });
     });
+    describe('toKeyValuePairArray', () => {
+      it('should throw error if input is invalid', () => {
+        expect(Convertor.toKeyValuePairArray.bind(null)).to.throw(Error);
+      });
+
+      it('should return array of length 1 when presented with input array with length 1', () => {
+        let input = new Array<Array<String>>(new Array<String>('1', 'One'));
+        var result = Convertor.toKeyValuePairArray(input);
+        expect(result.length).to.equal(1);
+      });
+
+      it('should return array of length 2 when presented with input array with length 1', () => {
+        let input = new Array<Array<String>>(new Array<String>('1', 'One'), new Array<String>('2', 'Two'));
+        var result = Convertor.toKeyValuePairArray(input);
+        expect(result.length).to.equal(2);
+      });
+
+      it('should return array of length 3 when presented with input array with length 1', () => {
+        let input = new Array<Array<String>>(new Array<String>('1', 'One'), new Array<String>('2', 'Two'), new Array<String>('3', 'Three'));
+        var result = Convertor.toKeyValuePairArray(input);
+        expect(result.length).to.equal(3);
+      });
+
+      it('should return Key of "1" for first item in array', () => {
+        let input = new Array<Array<String>>(new Array<String>('1', 'One'), new Array<String>('2', 'Two'), new Array<String>('3', 'Three'));
+        var result = Convertor.toKeyValuePairArray(input);
+        expect(result[0].key).to.equal('1');
+      });
+
+      it('should return Value of "One" for first item in array', () => {
+        let input = new Array<Array<String>>(new Array<String>('1', 'One'), new Array<String>('2', 'Two'), new Array<String>('3', 'Three'));
+        var result = Convertor.toKeyValuePairArray(input);
+        expect(result[0].value).to.equal('One');
+      });
+
+      it('should return Key of "2" for second item in array', () => {
+        let input = new Array<Array<String>>(new Array<String>('1', 'One'), new Array<String>('2', 'Two'), new Array<String>('3', 'Three'));
+        var result = Convertor.toKeyValuePairArray(input);
+        expect(result[1].key).to.equal('2');
+      });
+
+      it('should return Value of "Two" for second item in array', () => {
+        let input = new Array<Array<String>>(new Array<String>('1', 'One'), new Array<String>('2', 'Two'), new Array<String>('3', 'Three'));
+        var result = Convertor.toKeyValuePairArray(input);
+        expect(result[1].value).to.equal('Two');
+      });
+    });
   });
 
   describe('DateHelper', () => {

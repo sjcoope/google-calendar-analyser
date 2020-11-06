@@ -28,7 +28,7 @@ If you get a "permission denied" error when trying to run the batch file that bu
 - Tracking Flow Time
 - Reading settings from page (not from Config)
 - End to end testing
-- Add hours of conflicts during week.
+- Add minites/% of conflicts during week.
 
 # Bugs/Fixes
 

@@ -1,13 +1,13 @@
 export enum CalendarEventColour {
-  PaleBlue = 1,
-  PaleGreen = 2,
-  Mauve = 3,
-  PaleRed = 4,
-  Yellow = 5,
-  Orange = 6,
+  Lavender = 1,
+  Sage = 2,
+  Grape = 3,
+  Flamingo = 4,
+  Banana = 5,
+  Tangerine = 6,
   Cyan = 7,
-  Gray = 8,
-  Blue = 9,
-  Green = 10,
-  Red = 11
+  Graphite = 8,
+  Blueberry = 9,
+  Basil = 10,
+  Tomato = 11,
 }

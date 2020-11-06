@@ -43,7 +43,6 @@ describe('CalendarEventFormatter', () => {
 
       // ISSUE: See Issue #1 in ReadMe
       //when(mockedCalendarEvent.getMyStatus()).thenReturn(GoogleAppsScript.Calendar.GuestStatus.YES);
-
       when(mockedCalendarEvent.getMyStatus()).thenReturn();
 
       const googleCalendarEvent: GoogleAppsScript.Calendar.CalendarEvent = instance(mockedCalendarEvent);
@@ -51,7 +50,7 @@ describe('CalendarEventFormatter', () => {
     });
 
     it('should format color', () => {
-      expect(event.color).to.equal(CalendarEventColour[CalendarEventColour.Green]);
+      expect(event.color).to.equal(CalendarEventColour[CalendarEventColour.Basil]);
     });
 
     it('should format creators', () => {

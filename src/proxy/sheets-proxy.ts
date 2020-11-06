@@ -1,5 +1,3 @@
-import { Config } from '../shared/config';
-
 export interface ISheetsProxy {
   sheetExists(sheetName: string): boolean;
   populateSheet(sheetName: string, data: string[][]): boolean;
@@ -9,11 +7,9 @@ export interface ISheetsProxy {
 
 export class SheetsProxy implements ISheetsProxy {
   private spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet;
-  private config: Config;
 
-  constructor(spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet, config: Config) {
+  constructor(spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet) {
     this.spreadsheet = spreadsheet;
-    this.config = config;
   }
 
   populateSheet(sheetName: string, data: string[][], rangeName?: string): boolean {

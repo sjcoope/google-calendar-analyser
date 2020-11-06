@@ -10,6 +10,25 @@ export class KeyValuePair {
 
 export class Convertor {
   /* eslint-disable @typescript-eslint/no-explicit-any */
+  static toKeyValuePairArray(items: Array<Array<any>>): Array<KeyValuePair> {
+    if (!items) {
+      throw new Error('toMultiDimensionalArray: Invalid parameter');
+    }
+
+    const result = new Array<KeyValuePair>();
+    if (items.length === 0) return result;
+
+    for (let i = 0; i < items.length; i++) {
+      const row = items[i];
+      if (row.length >= 2) {
+        result.push(new KeyValuePair(row[0].toString(), row[1].toString()));
+      }
+    }
+
+    return result;
+  }
+
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   static toMultiDimensionalArray(items: Array<any>, addTitleRow?: boolean): Array<Array<any>> {
     if (!items) {
       throw new Error('toMultiDimensionalArray: Invalid parameter');

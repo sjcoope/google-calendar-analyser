@@ -1,42 +1,66 @@
 import { AppContext } from '../../src/shared/application-context';
 import { expect } from 'chai';
 import { mock, instance, when, anyString } from 'ts-mockito';
+import { SheetsProxy } from '../../src/proxy/sheets-proxy';
+import { CalendarProxy } from '../../src/proxy/calendar-proxy';
+import { CalendarEventFormatter } from '../../src/proxy/calendar-event-formatter';
+import { Settings } from '../../src/shared/settings/settings';
+import { Config } from '../../src/shared/config';
 describe('AppContext', () => {
   describe('on construction', () => {
-    var spreadsheetApp: GoogleAppsScript.Spreadsheet.SpreadsheetApp;
-    var calendarApp: GoogleAppsScript.Calendar.CalendarApp;
+    var sheetsProxy: SheetsProxy;
+    var calendarProxy: CalendarProxy;
+    var settings: Settings;
+    var config: Config;
 
     before(() => {
-      let spreadsheetAppMock: GoogleAppsScript.Spreadsheet.SpreadsheetApp = mock<GoogleAppsScript.Spreadsheet.SpreadsheetApp>();
-      spreadsheetApp = instance(spreadsheetAppMock);
+      let spreadsheetProxyMock: SheetsProxy = mock<SheetsProxy>();
+      sheetsProxy = instance(spreadsheetProxyMock);
 
-      let calendarAppMock: GoogleAppsScript.Calendar.CalendarApp = mock<GoogleAppsScript.Calendar.CalendarApp>();
-      let calendarMock: GoogleAppsScript.Calendar.Calendar = mock<GoogleAppsScript.Calendar.Calendar>();
-      when(calendarAppMock.getCalendarById(anyString())).thenReturn(instance(calendarMock));
-      calendarApp = instance(calendarAppMock);
+      let calendarProxyMock: CalendarProxy = mock<CalendarProxy>();
+      calendarProxy = instance(calendarProxyMock);
+
+      let settingsMock: Settings = mock<Settings>();
+      settings = instance(settingsMock);
+
+      let configMock: Config = mock<Config>();
+      config = instance(configMock);
     });
 
-    it('should throw error on null spreadsheetApp parameter', () => {
-      expect(() => new AppContext(null, calendarApp)).to.throw(Error);
+    it('should throw error on null sheetsProxy parameter', () => {
+      expect(() => new AppContext(null, calendarProxy, settings, config)).to.throw(Error);
     });
 
-    it('should throw error on null calendarApp parameter', () => {
-      expect(() => new AppContext(spreadsheetApp, null)).to.throw(Error);
+    it('should throw error on null calendarProxy parameter', () => {
+      expect(() => new AppContext(sheetsProxy, null, settings, config)).to.throw(Error);
+    });
+
+    it('should throw error on null settings parameter', () => {
+      expect(() => new AppContext(sheetsProxy, calendarProxy, null, config)).to.throw(Error);
+    });
+
+    it('should throw error on null config parameter', () => {
+      expect(() => new AppContext(sheetsProxy, calendarProxy, settings, null)).to.throw(Error);
     });
 
     it('should populate settings property', () => {
-      var appContext = new AppContext(spreadsheetApp, calendarApp);
+      var appContext = new AppContext(sheetsProxy, calendarProxy, settings, config);
       expect(appContext.settings).to.not.be.null;
     });
 
     it('should populate config property', () => {
-      var appContext = new AppContext(spreadsheetApp, calendarApp);
+      var appContext = new AppContext(sheetsProxy, calendarProxy, settings, config);
       expect(appContext.config).to.not.be.null;
     });
 
     it('should populate sheetsProxy property', () => {
-      var appContext = new AppContext(spreadsheetApp, calendarApp);
+      var appContext = new AppContext(sheetsProxy, calendarProxy, settings, config);
       expect(appContext.sheetsProxy).to.not.be.null;
+    });
+
+    it('should populate calendarProxy property', () => {
+      var appContext = new AppContext(sheetsProxy, calendarProxy, settings, config);
+      expect(appContext.calendarProxy).to.not.be.null;
     });
   });
 });

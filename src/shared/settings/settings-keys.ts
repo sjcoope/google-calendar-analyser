@@ -7,4 +7,13 @@ export enum SettingsKeys {
   DataSheetName,
   DataRangeName,
   CategoryIgnore,
+  CategoryOne,
+  CategoryTwo,
+  CategoryThree,
+  CategoryFour,
+  CategoryFive,
+  CategorySix,
+  CategorySeven,
+  CategoryEight,
+  CategoryNine,
 }
