@@ -1,7 +1,7 @@
-import { CalendarProxy } from '../../src/proxy/calendar-proxy';
+import { CalendarProxy } from '../../src/calendar/calendar-proxy';
 import { expect } from 'chai';
 import { EventData } from '../data/event-data';
-import { CalendarEvent } from '../../src/proxy/calendar-event';
+import { CalendarEvent } from '../../src/calendar/calendar-event';
 import { mock, instance, anything, when } from 'ts-mockito';
 import { CalendarEventMockFactory } from '../helper/calendar-event-mock-factory';
 
@@ -51,7 +51,7 @@ describe('CalendarProxy', () => {
         var calendarMock: GoogleAppsScript.Calendar.Calendar = mock<GoogleAppsScript.Calendar.Calendar>();
 
         var results = new Array<GoogleAppsScript.Calendar.CalendarEvent>();
-        for (var item of EventData.DataSet1) {
+        for (var item of EventData.EventDataItemDataSet1) {
           results.push(CalendarEventMockFactory.FromEventData(item));
         }
 

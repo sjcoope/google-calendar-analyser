@@ -2,9 +2,10 @@ import { Convertor, DateHelper, KeyValuePair } from './shared/common';
 import { AppContext } from './shared/application-context';
 import { SettingsKeys } from './shared/settings/settings-keys';
 import { Config } from './shared/config';
-import { SheetsProxy } from './proxy/sheets-proxy';
+import { SheetsProxy } from './sheets/sheets-proxy';
 import { Settings } from './shared/settings/settings';
-import { CalendarProxy } from './proxy/calendar-proxy';
+import { CalendarProxy } from './calendar/calendar-proxy';
+import { ActualTimeCalendarEventDecorator, ClashTimeCalendarEventDecorator } from './calendar/calendar-event-decorator';
 
 // Note: Has to be done this way as we've not initialised the AppContext yet and so can't
 // call appContext.settings (and we need settings to initialise it).
@@ -15,12 +16,14 @@ function initialiseSettings(config: Config) {
     settingsArray = config.getDefaultSettings();
   } else {
     // Read from settings sheet.
-    settingsArray = Convertor.toKeyValuePairArray(settingsSheet.getSheetValues(
-      config.sheetRangeSettings.startRow,
-      config.sheetRangeSettings.startColumn,
-      config.sheetRangeSettings.numRows,
-      config.sheetRangeSettings.numColumns
-    ));
+    settingsArray = Convertor.toKeyValuePairArray(
+      settingsSheet.getSheetValues(
+        config.sheetRangeSettings.startRow,
+        config.sheetRangeSettings.startColumn,
+        config.sheetRangeSettings.numRows,
+        config.sheetRangeSettings.numColumns
+      )
+    );
   }
   return new Settings(settingsArray);
 }
@@ -69,6 +72,10 @@ function getCalendarData() {
   // TODO: Allow week ranges of data to be configurable (to max of 5 for 11 weeks of data)
   const dateRanges = DateHelper.getDateRanges(1);
   const events = this.context.calendarProxy.getEvents(dateRanges.startDate, dateRanges.endDate);
+
+  this.context.calendarProxy.decorateEvents(events, new ActualTimeCalendarEventDecorator());
+  this.context.calendarProxy.decorateEvents(events, new ClashTimeCalendarEventDecorator());
+
   const datasheetName = this.context.settings.get(SettingsKeys.DataSheetName);
 
   if (this.context.sheetsProxy.sheetExists(datasheetName)) {

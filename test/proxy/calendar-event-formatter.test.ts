@@ -1,8 +1,8 @@
-import { CalendarEventFormatter } from '../../src/proxy/calendar-event-formatter';
+import { CalendarEventFormatter } from '../../src/calendar/calendar-event-formatter';
 import { expect } from 'chai';
-import { CalendarEvent } from '../../src/proxy/calendar-event';
+import { CalendarEvent } from '../../src/calendar/calendar-event';
 import { mock, when, instance } from 'ts-mockito';
-import { CalendarEventColour } from '../../src/proxy/calendar-event-colour';
+import { CalendarEventColour } from '../../src/calendar/calendar-event-colour';
 
 describe('CalendarEventFormatter', () => {
   describe('fromGoogleCalendarEvent', () => {

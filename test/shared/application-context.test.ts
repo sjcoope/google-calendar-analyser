@@ -1,9 +1,9 @@
 import { AppContext } from '../../src/shared/application-context';
 import { expect } from 'chai';
 import { mock, instance, when, anyString } from 'ts-mockito';
-import { SheetsProxy } from '../../src/proxy/sheets-proxy';
-import { CalendarProxy } from '../../src/proxy/calendar-proxy';
-import { CalendarEventFormatter } from '../../src/proxy/calendar-event-formatter';
+import { SheetsProxy } from '../../src/sheets/sheets-proxy';
+import { CalendarProxy } from '../../src/calendar/calendar-proxy';
+import { CalendarEventFormatter } from '../../src/calendar/calendar-event-formatter';
 import { Settings } from '../../src/shared/settings/settings';
 import { Config } from '../../src/shared/config';
 describe('AppContext', () => {

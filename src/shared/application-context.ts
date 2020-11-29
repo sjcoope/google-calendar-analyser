@@ -1,7 +1,7 @@
 import { IConfig, Config } from './config';
 import { ISettings, Settings } from './settings/settings';
-import { ISheetsProxy, SheetsProxy } from '../proxy/sheets-proxy';
-import { ICalendarProxy, CalendarProxy } from '../proxy/calendar-proxy';
+import { ISheetsProxy, SheetsProxy } from '../sheets/sheets-proxy';
+import { ICalendarProxy, CalendarProxy } from '../calendar/calendar-proxy';
 
 export class AppContext {
   constructor(sheetsProxy: SheetsProxy, calendarProxy: CalendarProxy, settings: Settings, config: Config) {
