@@ -23,11 +23,12 @@ If you get a "permission denied" error when trying to run the batch file that bu
 
 # TODO
 
+- Clean up TODOs
 - Automate build of help dialog.
 - Add getting started to help dialog (capture first steps, settings, etc.)
 - Add minites/% of conflicts during week.
-- Only get events between working hours??
-- Only get events that are yes/maybe (make this config)?
+- Only get events between working hours (make this config)
+- Only get events that are yes/maybe (make this config)
 - Restructure tests to reflect changes in calendar/proxy folders
 
 # Bugs/Fixes

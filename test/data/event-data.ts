@@ -70,39 +70,6 @@ export class EventData {
     new EventDataItem('Test 15', '2020-05-15T10:30', '2020-05-15T12:00', 'OWNER', [], ['test1@email.co.uk'], false, '', '1', false),
   ];
 
-  /* Types of clash to simulate.
-  - Meeting no clash.
-  - Meeting with clash mid way that ends after
-  - Meeting with clash mid way that ends before.
-  - Meeting with clash before that ends after (totally overlapped)
-  - Meeting with clash before that ends before
-  - Meeting with clash starts at same time and ends after
-  - Meeting with class starts at same time and ends before
-
-  */
-  static CalendarEventDataset1: Array<CalendarEvent> = [
-    EventData.initialiseCalendarEvent(new Date('2020-05-11T08:00'), new Date('2020-05-11T08:30'), 30, false, '1-No Clash'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-11T09:00'), new Date('2020-05-11T10:00'), 60, false, '2-No Clash'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-11T08:30'), new Date('2020-05-11T17:00'), 30, true, '3-No Clash-All Day'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-11T13:30'), new Date('2020-05-11T14:00'), 30, false, '4-Clash-Start Same-Finish After'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-11T13:30'), new Date('2020-05-11T14:30'), 60, false, '5-Clash-Start Same-Finish After'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-11T15:30'), new Date('2020-05-11T16:30'), 60, false, '6-'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-11T16:00'), new Date('2020-05-11T17:00'), 60, false, '7'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-12T10:00'), new Date('2020-05-12T11:30'), 90, false, '8'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-12T10:30'), new Date('2020-05-12T11:00'), 30, false, '9'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-12T10:30'), new Date('2020-05-12T11:30'), 60, false, '10'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-13T08:00'), new Date('2020-05-13T08:30'), 30, false, '11'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-13T08:00'), new Date('2020-05-13T08:30'), 30, false, '12'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-15T08:00'), new Date('2020-05-15T08:30'), 30, false, '13'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-15T08:00'), new Date('2020-05-15T08:30'), 30, false, '14'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-15T08:00'), new Date('2020-05-15T08:30'), 30, false, '15'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-15T08:00'), new Date('2020-05-15T08:30'), 30, false, '16'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-15T08:00'), new Date('2020-05-15T08:30'), 30, false, '17'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-15T08:00'), new Date('2020-05-15T08:30'), 30, false, '18'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-15T08:00'), new Date('2020-05-15T08:30'), 30, false, '19'),
-    EventData.initialiseCalendarEvent(new Date('2020-05-15T08:00'), new Date('2020-05-15T08:30'), 30, false, '20'),
-  ];
-
   public static initialiseCalendarEvent(
     startTime: Date,
     endTime: Date,
