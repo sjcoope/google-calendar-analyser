@@ -18,4 +18,38 @@ export class CalendarEvent {
   public color: CalendarEventColour;
   public isAllDayMeeting: boolean;
   public metadata: Array<KeyValuePair>;
+
+  // Basic Fluent Assertions - to help document logic around comparing CalendarEvents
+
+  startsBefore(event: CalendarEvent): boolean {
+    return this.startTime < event.startTime;
+  }
+
+  startsBeforeOrSameAs(event: CalendarEvent): boolean {
+    return this.startsBefore(event) || this.startsSame(event);
+  }
+
+  startsSame(event: CalendarEvent): boolean {
+    return this.startTime.getTime() == event.startTime.getTime();
+  }
+
+  startsAfter(event: CalendarEvent): boolean {
+    return this.startTime > event.startTime;
+  }
+
+  endsBefore(event: CalendarEvent): boolean {
+    return this.endTime < event.endTime;
+  }
+
+  endsSame(event: CalendarEvent): boolean {
+    return this.endTime.getTime() == event.endTime.getTime();
+  }
+
+  endsAfter(event: CalendarEvent): boolean {
+    return this.endTime > event.endTime;
+  }
+
+  endsAfterOrSame(event: CalendarEvent): boolean {
+    return this.endsAfter(event) || this.endsSame(event);
+  }
 }

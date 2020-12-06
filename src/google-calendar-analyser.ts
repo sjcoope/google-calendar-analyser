@@ -5,7 +5,7 @@ import { Config } from './shared/config';
 import { SheetsProxy } from './sheets/sheets-proxy';
 import { Settings } from './shared/settings/settings';
 import { CalendarProxy } from './calendar/calendar-proxy';
-import { ActualTimeCalendarEventDecorator, ClashTimeCalendarEventDecorator } from './calendar/calendar-event-decorator';
+import { ActualTimeCalendarEventDecorator } from './calendar/calendar-event-decorator';
 
 // Note: Has to be done this way as we've not initialised the AppContext yet and so can't
 // call appContext.settings (and we need settings to initialise it).
@@ -74,7 +74,6 @@ function getCalendarData() {
   const events = this.context.calendarProxy.getEvents(dateRanges.startDate, dateRanges.endDate);
 
   this.context.calendarProxy.decorateEvents(events, new ActualTimeCalendarEventDecorator());
-  this.context.calendarProxy.decorateEvents(events, new ClashTimeCalendarEventDecorator());
 
   const datasheetName = this.context.settings.get(SettingsKeys.DataSheetName);
 

@@ -25,7 +25,6 @@ export class CalendarEventFormatter {
     calendarEvent.durationInMins = Math.round((endTime.getTime() - startTime.getTime()) / 1000 / 60);
     calendarEvent.isRecurring = input.isRecurringEvent();
     calendarEvent.location = input.getLocation();
-    //calendarEvent.color = input.getColor().toString();
     calendarEvent.color = CalendarEventColour[input.getColor()];
     calendarEvent.isAllDayMeeting = input.isAllDayEvent();
 

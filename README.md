@@ -25,16 +25,16 @@ If you get a "permission denied" error when trying to run the batch file that bu
 
 - Automate build of help dialog.
 - Add getting started to help dialog (capture first steps, settings, etc.)
-- Tracking Flow Time
-- Reading settings from page (not from Config)
-- End to end testing
 - Add minites/% of conflicts during week.
+- Only get events between working hours??
+- Only get events that are yes/maybe (make this config)?
+- Restructure tests to reflect changes in calendar/proxy folders
 
 # Bugs/Fixes
 
 - Date locality issue.
 - If no colours/categories specified in week then queries fail (as limiting by number 10 but sheets has set the column to be text)
-- Workout how to handle conflicts.  Should they be recorded as time/meetings when the person can't be in the same place at the same time?? Maybe do that because then we can show the total hours of meetings the person is in.  Show hours of conflicts during week and breakdown per day (for single week view).
+- Workout how to handle conflicts. Should they be recorded as time/meetings when the person can't be in the same place at the same time?? Maybe do that because then we can show the total hours of meetings the person is in. Show hours of conflicts during week and breakdown per day (for single week view).
 
 # Issues
 
