@@ -5,7 +5,7 @@ import { Config } from './shared/config';
 import { SheetsProxy } from './sheets/sheets-proxy';
 import { Settings } from './shared/settings/settings';
 import { CalendarProxy } from './calendar/calendar-proxy';
-import { ActualTimeCalendarEventDecorator } from './calendar/calendar-event-decorator';
+import { ActualTimeCalendarEventDecorator, ICalendarEventDecorator } from './calendar/calendar-event-decorator';
 
 // Note: Has to be done this way as we've not initialised the AppContext yet and so can't
 // call appContext.settings (and we need settings to initialise it).
@@ -35,7 +35,10 @@ function initialise() {
 
   this.context = new AppContext(
     new SheetsProxy(SpreadsheetApp.getActive()),
-    new CalendarProxy(CalendarApp.getCalendarById(settings.get(SettingsKeys.CalendarID))),
+    new CalendarProxy(
+      CalendarApp.getCalendarById(settings.get(SettingsKeys.CalendarID)),
+      new Array<ICalendarEventDecorator>(new ActualTimeCalendarEventDecorator())
+    ),
     settings,
     config
   );
@@ -72,8 +75,6 @@ function getCalendarData() {
   // TODO: Allow week ranges of data to be configurable (to max of 5 for 11 weeks of data)
   const dateRanges = DateHelper.getDateRanges(1);
   const events = this.context.calendarProxy.getEvents(dateRanges.startDate, dateRanges.endDate);
-
-  this.context.calendarProxy.decorateEvents(events, new ActualTimeCalendarEventDecorator());
 
   const datasheetName = this.context.settings.get(SettingsKeys.DataSheetName);
 

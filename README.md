@@ -23,13 +23,14 @@ If you get a "permission denied" error when trying to run the batch file that bu
 
 # TODO
 
+- get toMultiDimensionalArray to output metdata (or add as another field on CalendarEvent that can be populated)
 - Clean up TODOs
 - Automate build of help dialog.
 - Add getting started to help dialog (capture first steps, settings, etc.)
 - Add minites/% of conflicts during week.
 - Only get events between working hours (make this config)
 - Only get events that are yes/maybe (make this config)
-- Restructure tests to reflect changes in calendar/proxy folders
+- Better error handling when you don't have access to the calendar trying to sync.
 
 # Bugs/Fixes
 

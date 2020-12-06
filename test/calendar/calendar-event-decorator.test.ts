@@ -120,14 +120,12 @@ describe('CalendarEventDecorator', () => {
       executeArrayOfTests(calendarEvents, runs);
     });
 
-    function executeArrayOfTests(calendarEvents, runs) {
+    function executeArrayOfTests(calendarEvents: Array<CalendarEvent>, runs) {
       runs.forEach((run, index) => {
         describe('calendar event #' + (index + 1), () => {
           let event = calendarEvents[index];
-          let actualTime = event.metadata['actualTime'];
-
-          it('should return "actualTime" of ' + run.expectedActualTime + ' mins for event: ' + event.title, () => {
-            expect(actualTime).equals(run.expectedActualTime);
+          let actualTime = it('should return "actualTime" of ' + run.expectedActualTime + ' mins for event: ' + event.title, () => {
+            expect(event.actualDurationInMins).equals(run.expectedActualTime);
           });
         });
       });

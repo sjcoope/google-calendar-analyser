@@ -60,7 +60,7 @@ export class ActualTimeCalendarEventDecorator implements ICalendarEventDecorator
         }
       }
 
-      currentEvent.metadata['actualTime'] = actualTime;
+      currentEvent.actualDurationInMins = actualTime;
 
       // Only upate previousEvent if not a full clash (to capture case where first meeting covers multiple subsequent meetings)
       if (actualTime != 0) previousEvent = currentEvent;
