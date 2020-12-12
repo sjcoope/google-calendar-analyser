@@ -95,7 +95,7 @@ describe('CalendarEventDecorator', () => {
       executeArrayOfTests(calendarEvents, runs);
     });
 
-    describe('with one long all day event', () => {
+    describe('with one long event', () => {
       var calendarEvents = Array<CalendarEvent>(
         EventData.initialiseCalendarEvent(new Date('2020-05-11T08:00'), new Date('2020-05-11T16:30'), 510, false, '1-No Clash'),
         EventData.initialiseCalendarEvent(new Date('2020-05-11T08:00'), new Date('2020-05-11T08:30'), 30, false, '2-Clash Start Ends Before'),
@@ -115,6 +115,31 @@ describe('CalendarEventDecorator', () => {
         { id: 4, expectedActualTime: 0 },
         { id: 5, expectedActualTime: 0 },
         { id: 6, expectedActualTime: 30 },
+      ];
+
+      executeArrayOfTests(calendarEvents, runs);
+    });
+
+    describe('with one all day event', () => {
+      var calendarEvents = Array<CalendarEvent>(
+        EventData.initialiseCalendarEvent(new Date('2020-05-11T08:00'), new Date('2020-05-11T16:30'), 510, true, '1-No Clash'),
+        EventData.initialiseCalendarEvent(new Date('2020-05-11T08:00'), new Date('2020-05-11T08:30'), 30, false, '2-Clash Start Ends Before'),
+        EventData.initialiseCalendarEvent(new Date('2020-05-11T09:30'), new Date('2020-05-11T10:00'), 30, false, '3-Clash Midway Ends Before'),
+        EventData.initialiseCalendarEvent(new Date('2020-05-11T10:30'), new Date('2020-05-11T11:30'), 60, false, '4-Clash Midway Ends Before'),
+        EventData.initialiseCalendarEvent(new Date('2020-05-11T14:00'), new Date('2020-05-11T15:00'), 60, false, '5-Clash Midway Ends Before'),
+        EventData.initialiseCalendarEvent(new Date('2020-05-11T16:00'), new Date('2020-05-11T17:00'), 60, false, '6-Clash Midway Ends After')
+      );
+
+      decorator.decorate(calendarEvents);
+
+      // Runs will be sorted and not in order above.
+      var runs = [
+        { id: 1, expectedActualTime: 0 },
+        { id: 2, expectedActualTime: 30 },
+        { id: 3, expectedActualTime: 30 },
+        { id: 4, expectedActualTime: 60 },
+        { id: 5, expectedActualTime: 60 },
+        { id: 6, expectedActualTime: 60 },
       ];
 
       executeArrayOfTests(calendarEvents, runs);

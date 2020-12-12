@@ -43,19 +43,21 @@ export class ActualTimeCalendarEventDecorator implements ICalendarEventDecorator
     let actualTime: number;
     sortedEvents.forEach((currentEvent) => {
       actualTime = 0;
-      if (!previousEvent) actualTime = currentEvent.durationInMins;
-      else {
-        if (previousEvent.endTime <= currentEvent.startTime) {
-          // No clash
-          actualTime = currentEvent.durationInMins;
-        } else {
-          // Clash exists - test for which type of clash
-          if (previousEvent.startTime <= currentEvent.startTime && previousEvent.endTime >= currentEvent.endTime) {
-            // Full Clash - current event is fully clashed with the previous meeting
-            actualTime = 0;
+      if (!currentEvent.isAllDayMeeting) {
+        if (!previousEvent) actualTime = currentEvent.durationInMins;
+        else {
+          if (previousEvent.endTime <= currentEvent.startTime) {
+            // No clash
+            actualTime = currentEvent.durationInMins;
           } else {
-            // Partial Clash - current event must end after previous event.
-            actualTime = (currentEvent.endTime.getTime() - previousEvent.endTime.getTime()) / (1000 * 60);
+            // Clash exists - test for which type of clash
+            if (previousEvent.startTime <= currentEvent.startTime && previousEvent.endTime >= currentEvent.endTime) {
+              // Full Clash - current event is fully clashed with the previous meeting
+              actualTime = 0;
+            } else {
+              // Partial Clash - current event must end after previous event.
+              actualTime = (currentEvent.endTime.getTime() - previousEvent.endTime.getTime()) / (1000 * 60);
+            }
           }
         }
       }
